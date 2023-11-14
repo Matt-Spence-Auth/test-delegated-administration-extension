@@ -529,21 +529,8 @@ export default (storage, scriptManager) => {
   api.get('/:id/logs', verifyUserAccess('read:logs', scriptManager), (req, res, next) => {
     getApiToken(req)
       .then((accessToken) => {
-    //アプリ管理者のapp_metadata内のClientIDを取得
-   let app_list = req.user.app_metadata.managed_apps;
-
-    let query = "";
-    for (let i = 0; i < app_list.length; ++i) {
-      //取り出した値が配列の最後の値だったら"OR"を付与しない
-     if (i === app_list.length - 1) {
-      query += 'client_id:' + app_list[i];
-     } else {
-      query += 'client_id:' + app_list[i] + ' OR ';
-     }
-    }
         const options = {
-          //qパラメータにアプリ管理者が管理するアプリのclient_idを指定する
-          uri: `https://${config('AUTH0_DOMAIN')}/api/v2/users/${encodeURIComponent(req.params.id)}/logs?q=${query}`, 
+          uri: `https://${config('AUTH0_DOMAIN')}/api/v2/users/${encodeURIComponent(req.params.id)}/logs`,
           headers: {
             authorization: `Bearer ${accessToken}`
           },
