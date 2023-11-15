@@ -43,7 +43,7 @@ export default class SearchBar extends Component {
 
     return (
       <div className="help-block">
-        To perform your search, press <span className="keyboard-button">enter</span>.
+        To perform your search, asdas press <span className="keyboard-button">enter</span>.
         You can also search for specific fields, eg: <strong>email:"john@doe.com"</strong>.
       </div>
     );
